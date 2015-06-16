@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "jsx --harmony lib/applink.js > dest/applink.js",
-    "prepublish": "npm run build"
+    "build": "jsx --harmony lib/applink.jsx > lib/applink.js",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
