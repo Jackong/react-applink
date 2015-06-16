@@ -1,6 +1,6 @@
 {
   "name": "react-applink",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "applink for react",
   "main": "index.js",
   "scripts": {
