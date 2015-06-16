@@ -6,7 +6,7 @@ var MobileDetect = require('mobile-detect');
 var md = new MobileDetect(window.navigator.userAgent);
 
 var AppLink = React.createClass({
-    getInitialState() {
+    getInitialState: function() {
         return {link: null, iframe: false};
     },
     propTypes: {
@@ -20,7 +20,7 @@ var AppLink = React.createClass({
         ]),
         link: React.PropTypes.string
     },
-    getUrl() {
+    getUrl: function() {
         if (typeof this.props.href === 'string') {
             return this.props.href;
         }
@@ -32,14 +32,15 @@ var AppLink = React.createClass({
         }
         return this.props.href.other;
     },
-    handler() {
+    handler: function() {
         var clickEvt = window.CustomEvent ? new window.CustomEvent('click', {canBubble: true,cancelable: true}) : document.createEvent('Event');
         clickEvt.initEvent && clickEvt.initEvent('click', true, true);
         md.is('AndroidOS') && this.refs.link.getDOMNode().dispatchEvent(clickEvt);
         md.is('iOS') && this.setState({iframe: true});
     },
-    render() {
-        var {href, link, ...props} = this.props;
+    render: function() {
+        var href = this.props.href;
+        var link = this.props.link;
 
         var linkElement = (
             <a ref='link' href={link} style={{display: 'none'}}></a>
@@ -55,7 +56,7 @@ var AppLink = React.createClass({
             <div>
                 {frameElement}
                 {linkElement}
-                <a href={href} {...props} onClick={this.handler}>{this.props.children}</a>
+                <a href={href} onClick={this.handler}>{this.props.children}</a>
             </div>
         );
     }
