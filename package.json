@@ -4,7 +4,9 @@
   "description": "applink for react",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "jsx --harmony lib/applink.js > dest/applink.js",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
