@@ -1,12 +1,12 @@
 {
   "name": "react-applink",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "applink for react",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "build": "jsx --harmony lib/applink.jsx > lib/applink.js",
-    "postinstall": "npm run build"
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
