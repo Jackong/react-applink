@@ -1,25 +1,15 @@
-# react-applink
-### app link for react
-
-## cases:
-* For installed device, it will call your APP.
-* For uninstall device, it will directly jump to your page.
-
-## usage:
-* install:
-> npm i --save react-applink
-
-* code:
-
-```js
+/**
+ * Created by daisy on 15/6/17.
+ */
+var React = require('react');
 const WEB = 'http://www.example.com';
-const LINK = 'example://users/1001';
+const LINK = 'example:///users/1001';
 const DOWNLOAD = {
     android: 'http://a.app.qq.com/o/simple.jsp?pkgname=com.example.xxx',
     iOS: 'https://itunes.apple.com/cn/app/xxx?l=en&mt=8',
     other: WEB
 };
-var AppLink = require('react-applink');
+var AppLink = require('./lib/applink');
 React.render((
     <div>
         <AppLink href={WEB} link={LINK} >
@@ -31,4 +21,3 @@ React.render((
         </AppLink>
     </div>
 ), document.body);
-```

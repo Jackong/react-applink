@@ -39,8 +39,7 @@ var AppLink = React.createClass({
         md.is('iOS') && this.setState({iframe: true});
     },
     render() {
-        var href = this.props.href;
-        var link = this.props.link;
+        var {href, link, ...props} = this.props;
 
         var linkElement = (
             <a ref='link' href={link} style={{display: 'none'}}></a>
@@ -53,11 +52,11 @@ var AppLink = React.createClass({
         }
         href = this.getUrl();
         return (
-            <div>
+            <a href={href} {...props} onClick={this.handler}>
+                {this.props.children}
                 {frameElement}
                 {linkElement}
-                <a href={href} onClick={this.handler}>{this.props.children}</a>
-            </div>
+            </a>
         );
     }
 });
