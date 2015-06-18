@@ -45,8 +45,7 @@ var AppLink = React.createClass({
         if (!this.props.immediate) {
             return;
         }
-        this.onClick();
-        location.href = this.getUrl();
+        this.refs.origin.getDOMNode().dispatchEvent(this.clickEvent());
     },
     render() {
         var {href, link, ...props} = this.props;
@@ -62,7 +61,7 @@ var AppLink = React.createClass({
         }
         href = this.getUrl();
         return (
-            <a href={href} {...props} onClick={this.onClick}>
+            <a ref='origin' href={href} {...props} onClick={this.onClick}>
                 {this.props.children}
                 {frameElement}
                 {linkElement}
