@@ -32,11 +32,21 @@ var AppLink = React.createClass({
         }
         return this.props.href.other;
     },
-    handler() {
+    clickEvent: function () {
         var clickEvt = window.CustomEvent ? new window.CustomEvent('click', {canBubble: true,cancelable: true}) : document.createEvent('Event');
         clickEvt.initEvent && clickEvt.initEvent('click', true, true);
-        md.is('AndroidOS') && this.refs.link.getDOMNode().dispatchEvent(clickEvt);
+        return clickEvt;
+    },
+    onClick() {
+        md.is('AndroidOS') && this.refs.link.getDOMNode().dispatchEvent(this.clickEvent());
         md.is('iOS') && this.setState({iframe: true});
+    },
+    componentDidMount() {
+        if (!this.props.immediate) {
+            return;
+        }
+        this.onClick();
+        location.href = this.getUrl();
     },
     render() {
         var {href, link, ...props} = this.props;
@@ -52,7 +62,7 @@ var AppLink = React.createClass({
         }
         href = this.getUrl();
         return (
-            <a href={href} {...props} onClick={this.handler}>
+            <a href={href} {...props} onClick={this.onClick}>
                 {this.props.children}
                 {frameElement}
                 {linkElement}

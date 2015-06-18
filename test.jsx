@@ -12,7 +12,7 @@ const DOWNLOAD = {
 var AppLink = require('./lib/applink');
 React.render((
     <div>
-        <AppLink href={WEB} link={LINK} >
+        <AppLink href={WEB} link={LINK}>
             WEB
         </AppLink>
         <br/>
