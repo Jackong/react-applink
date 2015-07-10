@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "jsx --harmony lib/applink.jsx > lib/applink.js",
+    "build-test": "jsx --harmony test.jsx > test.js && webpack test.js test.js",
     "prepublish": "npm run build"
   },
   "repository": {
