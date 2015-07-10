@@ -5,18 +5,14 @@ var React = require('react');
 const WEB = 'http://www.example.com';
 const LINK = 'example:///users/1001';
 const DOWNLOAD = {
-    android: 'http://a.app.qq.com/o/simple.jsp?pkgname=com.example.xxx',
+    android: 'http://app.qq.com/#id=detail&appid=1101116004',
     iOS: 'https://itunes.apple.com/cn/app/xxx?l=en&mt=8',
     other: WEB
 };
 var AppLink = require('./lib/applink');
 React.render((
     <div>
-        <AppLink href={WEB} link={LINK}>
-            WEB
-        </AppLink>
-        <br/>
-        <AppLink href={DOWNLOAD}link={LINK} >
+        <AppLink href={DOWNLOAD} link={LINK} immediate={false}>
             DOWNLOAD
         </AppLink>
     </div>

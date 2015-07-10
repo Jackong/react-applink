@@ -9,6 +9,7 @@ var AppLink = React.createClass({
     getInitialState() {
         return {link: null, iframe: false};
     },
+    clicked: false,
     propTypes: {
         href: React.PropTypes.oneOfType([
             React.PropTypes.string,
@@ -33,19 +34,32 @@ var AppLink = React.createClass({
         return this.props.href.other;
     },
     clickEvent: function () {
-        var clickEvt = window.CustomEvent ? new window.CustomEvent('click', {canBubble: true,cancelable: true}) : document.createEvent('Event');
-        clickEvt.initEvent && clickEvt.initEvent('click', true, true);
+        var clickEvt = window.CustomEvent ? new window.CustomEvent('click', {canBubble: false, cancelable: true}) : document.createEvent('Event');
+        clickEvt.initEvent && clickEvt.initEvent('click', false, true);
         return clickEvt;
     },
     onClick() {
-        md.is('AndroidOS') && this.refs.link.getDOMNode().dispatchEvent(this.clickEvent());
-        md.is('iOS') && this.setState({iframe: true});
+        this.callAndroid();
+        this.calliOS();
+    },
+    callAndroid() {
+        if (!md.is('AndroidOS')) {
+            return;
+        }
+        this.refs.link.getDOMNode().dispatchEvent(this.clickEvent());
+    },
+    calliOS() {
+        if (!md.is('iOS')) {
+            return;
+        }
+        this.setState({iframe: true});
     },
     componentDidMount() {
         if (!this.props.immediate) {
             return;
         }
-        this.onClick();
+        this.callAndroid();
+        this.calliOS();
         setTimeout(function () {
             location.href = this.getUrl();
         }.bind(this), 700);
@@ -69,6 +83,7 @@ var AppLink = React.createClass({
                 {frameElement}
                 {linkElement}
             </a>
+
         );
     }
 });
